@@ -33,7 +33,7 @@ export default function Closing() {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: "url(/assets/box-motif.webp)",
+          backgroundImage: `url(${import.meta.env.BASE_URL}assets/box-motif.webp)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

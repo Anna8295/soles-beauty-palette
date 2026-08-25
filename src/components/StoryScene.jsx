@@ -2,7 +2,10 @@ import { useEffect, useRef } from "react";
 import { HOTSPOTS, PRODUCTS } from "../data/products";
 
 const FRAME_COUNT = 26;
-const FRAMES = Array.from({ length: FRAME_COUNT }, (_, i) => `/assets/frames/f${String(i + 1).padStart(2, "0")}.webp`);
+// Base-relative so paths still resolve when the site is served from a
+// sub-path (e.g. the GitHub Pages project path), not just from domain root.
+const ASSET_BASE = import.meta.env.BASE_URL;
+const FRAMES = Array.from({ length: FRAME_COUNT }, (_, i) => `${ASSET_BASE}assets/frames/f${String(i + 1).padStart(2, "0")}.webp`);
 const LETTERS = ["S", "o", "l", "e", "a"];
 // Fractal-noise SVG, tiled and drifted, so the hero backdrop reads as paper/light rather than a flat fill.
 const GRAIN = `url("data:image/svg+xml,${encodeURIComponent(
@@ -281,8 +284,8 @@ export default function StoryScene({ headerRef, onOpenProduct }) {
             transform: "translate(-50%,-50%)",
             zIndex: 3,
             ...FRAME_BOX,
-            WebkitMaskImage: "url(/assets/frames/f01-mask.png)",
-            maskImage: "url(/assets/frames/f01-mask.png)",
+            WebkitMaskImage: `url(${ASSET_BASE}assets/frames/f01-mask.png)`,
+            maskImage: `url(${ASSET_BASE}assets/frames/f01-mask.png)`,
             WebkitMaskSize: "contain",
             maskSize: "contain",
             WebkitMaskPosition: "center",
@@ -340,7 +343,7 @@ export default function StoryScene({ headerRef, onOpenProduct }) {
 
           <div ref={flatRef} style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", width: "min(88svh, 92vw)", height: "min(88svh, 92vw)", opacity: 0, pointerEvents: "none" }}>
             <div style={{ position: "relative", width: "100%", height: "100%" }}>
-              <img src="/assets/open.webp" alt="Solea palette, open, five pans and the duo brush" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain" }} />
+              <img src={`${ASSET_BASE}assets/open.webp`} alt="Solea palette, open, five pans and the duo brush" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain" }} />
 
               {HOTSPOTS.map((h, i) => {
                 const product = PRODUCTS[h.productId];
