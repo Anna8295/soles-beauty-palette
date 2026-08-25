@@ -1,0 +1,187 @@
+:root {
+  --dawn: #fbf1e6;
+  --sand: #f2d8ae;
+  --ember: #cf8850;
+  --void: #1d0f08;
+  --umber: #2c1710;
+  --paper: #faf1e6;
+  --gold: #e3a25c;
+  --muted: #8a6a52;
+  --muted-on-dark: #b39a85;
+  --rose: #e6b9a0;
+  --line: rgba(44, 23, 16, 0.14);
+  --line-on-dark: rgba(250, 241, 230, 0.14);
+
+  --font-display: "Fraunces", "Iowan Old Style", ui-serif, serif;
+  --font-body: "Manrope", "Inter", system-ui, sans-serif;
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--dawn);
+}
+
+body {
+  margin: 0;
+  background: var(--dawn);
+  color: var(--umber);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 400;
+  font-family: var(--font-display);
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+::selection {
+  background: var(--ember);
+  color: var(--paper);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes bob1 {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3.4%) scale(1.018);
+  }
+}
+@keyframes bob2 {
+  0%,
+  100% {
+    transform: translateY(-1.6%) scale(1.012);
+  }
+  50% {
+    transform: translateY(2.6%) scale(0.99);
+  }
+}
+@keyframes bob3 {
+  0%,
+  100% {
+    transform: translateY(1.2%) scale(0.994);
+  }
+  50% {
+    transform: translateY(-2.8%) scale(1.02);
+  }
+}
+
+@keyframes grain-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-6%, -4%, 0);
+  }
+}
+
+/* Vertical wordmark in StoryScene: the left margin only reads as empty on
+   genuinely large screens, so keep it out of the way below XL. */
+.discover-mark {
+  display: none;
+}
+@media (min-width: 1280px) {
+  .discover-mark {
+    display: flex;
+  }
+}
+
+.hotspot {
+  transition:
+    opacity 380ms ease,
+    transform 640ms cubic-bezier(0.2, 1.48, 0.32, 1),
+    filter 640ms cubic-bezier(0.2, 1.48, 0.32, 1);
+  transform: scale(1) translateY(0);
+  filter: drop-shadow(0 2px 3px rgba(28, 15, 8, 0));
+  -webkit-tap-highlight-color: transparent;
+}
+.hotspot:hover,
+.hotspot:focus-visible {
+  opacity: 1 !important;
+  transform: scale(1.6) translateY(var(--lift-y, -7%));
+  filter: drop-shadow(0 20px 24px rgba(28, 15, 8, 0.42));
+  z-index: 9;
+}
+.hotspot:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 8px;
+  border-radius: 8px;
+}
+/* No hover on touch: the base photo already shows every pan, so the overlay stays hidden
+   at rest (matching desktop) and only pops on tap, instead of duplicating each pan permanently. */
+@media (hover: none) {
+  .hotspot:active {
+    opacity: 1 !important;
+    transform: scale(1.5) translateY(var(--lift-y, -7%)) !important;
+    filter: drop-shadow(0 16px 20px rgba(28, 15, 8, 0.38)) !important;
+  }
+}
+
+.cta-link:hover,
+.cta-link:focus-visible {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--void);
+}
+.footer-link:hover,
+.footer-link:focus-visible {
+  color: var(--gold);
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
